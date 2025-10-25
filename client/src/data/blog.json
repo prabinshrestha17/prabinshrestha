@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Mastering React Hooks in 10 Minutes",
+    "excerpt": "A deep dive into the most commonly used React Hooks, how they work, and how you can leverage them to write cleaner, more efficient component logic.",
+    "imageUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1470&auto=format&fit=crop",
+    "author": "Prabin Shrestha",
+    "date": "October 26, 2023",
+    "url": "#"
+  },
+  {
+    "id": 2,
+    "title": "The Art of State Management with Redux Toolkit",
+    "excerpt": "Simplify your Redux logic with Redux Toolkit. This post covers the essentials of creating slices, async thunks, and connecting your store to React.",
+    "imageUrl": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1470&auto=format&fit=crop",
+    "author": "Prabin Shrestha",
+    "date": "November 15, 2023",
+    "url": "#"
+  },
+  {
+    "id": 3,
+    "title": "Building Scalable APIs with Node.js and Express",
+    "excerpt": "Learn the best practices for structuring your Node.js application, handling errors, and creating RESTful APIs that are both robust and easy to maintain.",
+    "imageUrl": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1470&auto=format&fit=crop",
+    "author": "Prabin Shrestha",
+    "date": "December 05, 2023",
+    "url": "#"
+  }
+]

@@ -1,0 +1,9 @@
+POST http://localhost:5000/contact/create
+Content-Type: application/json
+
+{
+  "clientName": "Prabin shrestha",
+  "email":"xthaprabin125@gmail.com",
+  "subject":"Inquiry about services",
+  "message":"Hello, I would like to know more about your services."
+}
