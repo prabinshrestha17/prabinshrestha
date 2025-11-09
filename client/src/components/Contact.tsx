@@ -84,6 +84,7 @@ const Contact: React.FC = () => {
         subject: formData.subject,
         message: formData.message,
       });
+      console.log(response.data);
 
       toast.success("Message sent successfully!");
 
