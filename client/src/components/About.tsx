@@ -1,32 +1,87 @@
 "use client";
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { motion, Variants } from "framer-motion"; // Import motion and Variants
 
-const BentoCard = ({
-  children,
-  className,
-}: {
+interface BentoCardProps {
   children: React.ReactNode;
   className?: string;
+  // Add support for Framer Motion props like variants
+  variants?: Variants;
+  initial?: string;
+  animate?: string;
+}
+
+// Update BentoCard to use motion.div
+const BentoCard: React.FC<BentoCardProps> = ({
+  children,
+  className,
+  variants,
+  initial,
+  animate,
 }) => (
-  <div
+  <motion.div
+    variants={variants}
+    initial={initial}
+    animate={animate}
+    // The rest of the classNames remain the same
     className={`relative w-full h-full rounded-2xl hover:rounded-3xl  bg-neutral-900 border border-neutral-800 p-8 overflow-hidden transition-all duration-300 ease-in-out hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/10 ${className}`}
   >
     {children}
-  </div>
+  </motion.div>
 );
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.3, // Delay before the first child starts
+      staggerChildren: 0.15, // Delay between each child item
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
+const titleVariants: Variants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 
 const About: React.FC = () => {
   return (
     <section id="about" className="py-24 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl relative md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 pb-4">
+        <motion.h2 // Apply motion to the title
+          variants={titleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          className="text-4xl relative md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 pb-4"
+        >
           About Me
-        </h2>
+        </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-6xl mx-auto">
+        <motion.div // Apply motion to the grid container
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-6xl mx-auto"
+        >
           {/* Main Bio Card */}
-          <BentoCard className="md:col-span-2">
+          <BentoCard className="md:col-span-2" variants={itemVariants}>
             <h3 className="text-2xl font-semibold text-neutral-100 mb-4">
               A Passion for Building
             </h3>
@@ -48,7 +103,10 @@ const About: React.FC = () => {
           </BentoCard>
 
           {/* Image Card */}
-          <BentoCard className="relative overflow-hidden group">
+          <BentoCard
+            className="relative overflow-hidden group"
+            variants={itemVariants}
+          >
             <img
               src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Abstract code"
@@ -63,7 +121,7 @@ const About: React.FC = () => {
           </BentoCard>
 
           {/* Philosophy Card */}
-          <BentoCard className="group">
+          <BentoCard className="group" variants={itemVariants}>
             <h3 className="text-xl font-semibold text-neutral-100 mb-2">
               From Concept to Code
             </h3>
@@ -76,7 +134,7 @@ const About: React.FC = () => {
           </BentoCard>
 
           {/* Skills Highlight Card */}
-          <BentoCard className="md:col-span-2 group">
+          <BentoCard className="md:col-span-2 group" variants={itemVariants}>
             <h3 className="text-xl font-semibold text-neutral-100 mb-2">
               My Tech Toolbox
             </h3>
@@ -103,7 +161,7 @@ const About: React.FC = () => {
               ))}
             </div>
           </BentoCard>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

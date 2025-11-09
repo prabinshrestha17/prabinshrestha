@@ -6,6 +6,7 @@ import axios from "axios";
 import { baseUrl } from "@/api/env";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { motion, Variants } from "framer-motion"; // Import motion and Variants
 
 const useMagneticEffect = (ref: React.RefObject<HTMLButtonElement | null>) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -29,6 +30,27 @@ const useMagneticEffect = (ref: React.RefObject<HTMLButtonElement | null>) => {
   const textTransform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
 
   return { transform, textTransform, handleMouseMove, handleMouseLeave };
+};
+
+// Framer Motion Variants
+const titleVariants: Variants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const subtitleVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } },
+};
+
+const formVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.98, y: 30 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.8, delay: 0.4, ease: "easeOut" },
+  },
 };
 
 const Contact: React.FC = () => {
@@ -87,15 +109,34 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-24 px-4">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 pb-4">
+        <motion.h2 // Apply motion to the title
+          variants={titleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50 pb-4"
+        >
           Get In Touch
-        </h2>
-        <p className="text-lg text-neutral-400 text-center max-w-2xl mx-auto mt-4 mb-16">
+        </motion.h2>
+        <motion.p // Apply motion to the subtitle
+          variants={subtitleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          className="text-lg text-neutral-400 text-center max-w-2xl mx-auto mt-4 mb-16"
+        >
           Have a question or a project in mind? Feel free to reach out. I'm
           always open to discussing new ideas and opportunities.
-        </p>
+        </motion.p>
 
-        <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl mx-auto">
+        <motion.form // Apply motion to the form
+          variants={formVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          onSubmit={handleSubmit}
+          className="space-y-8 max-w-2xl mx-auto"
+        >
           <ToastContainer position="bottom-right" autoClose={5000} />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -223,7 +264,7 @@ const Contact: React.FC = () => {
               </span>
             </button>
           </div>
-        </form>
+        </motion.form>
       </div>
     </section>
   );

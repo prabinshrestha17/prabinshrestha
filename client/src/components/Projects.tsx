@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { motion, Variants } from "framer-motion"; // Import motion and Variants
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,6 +15,21 @@ interface Project {
   imageUrl: string;
   projectUrl: string;
 }
+
+const titleVariants: Variants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const subtitleVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } },
+};
+
+const swiperVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, delay: 0.4 } },
+};
 
 const Projects: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -33,15 +49,32 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-24 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-400 bg-opacity-50 pb-4">
+        <motion.h2 // Apply motion to the title
+          variants={titleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          className="text-4xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-400 bg-opacity-50 pb-4"
+        >
           My Projects
-        </h2>
-        <p className="text-lg text-neutral-400 text-center max-w-2xl mx-auto mt-4 mb-16">
+        </motion.h2>
+        <motion.p // Apply motion to the subtitle
+          variants={subtitleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          className="text-lg text-neutral-400 text-center max-w-2xl mx-auto mt-4 mb-16"
+        >
           Here are some of the projects I've worked on, showcasing my skills in
           creating modern and functional web applications.
-        </p>
-
-        <div className="relative">
+        </motion.p>
+        <motion.div // Apply motion to the main projects container
+          variants={swiperVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="relative"
+        >
           {projects.length > 0 && (
             <Swiper
               modules={[Pagination, Navigation, Autoplay]}
@@ -91,7 +124,7 @@ const Projects: React.FC = () => {
               background-color: #a78bfa !important;
             }
           `}</style>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

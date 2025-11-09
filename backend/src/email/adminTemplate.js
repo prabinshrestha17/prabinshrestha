@@ -9,7 +9,7 @@ exports.adminNotificationMailTemplate = (
       
       <!-- Header -->
       <div style="background: linear-gradient(90deg, #2563EB, #1D4ED8); color: #fff; padding: 20px 0; text-align: center;">
-        <h1 style="margin: 0; font-size: 22px;">📩 New Message Received</h1>
+        <h1 style="margin: 0; font-size: 22px;"> New Message Received</h1>
       </div>
 
       <!-- Body -->

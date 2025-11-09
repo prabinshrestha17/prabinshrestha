@@ -21,14 +21,14 @@ exports.userThankYouMailTemplate = (clientName, subject, message) => `
 
         <p style="font-size: 14px; color: #777;">
           We appreciate your time and will reach out soon.  
-          Have a great day! 🌟
+          Have a great day! 
         </p>
       </div>
 
       <!-- Footer -->
       <div style="background: #f9fafb; text-align: center; padding: 16px; border-top: 1px solid #eee;">
         <p style="margin: 0; font-size: 13px; color: #888;">
-          © ${new Date().getFullYear()} Your Company Name. All rights reserved.
+          © ${new Date().getFullYear()} Prabin Shretsha. All rights reserved.
         </p>
       </div>
     </div>
