@@ -6,9 +6,16 @@ const connectDB = require("./src/database/connectDB");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 connectDB();
 
-app.use(cors());
+// Allow requests only from your frontend
+app.use(
+  cors({
+    origin: "https://prabinshrestha-theta.vercel.app", // replace with your frontend URL
+    credentials: true, // if you plan to use cookies or authentication
+  })
+);
 
 app.use(bodyParser.json());
 
