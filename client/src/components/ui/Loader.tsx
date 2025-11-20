@@ -32,7 +32,7 @@ const Loader: React.FC = () => {
           tracking-widest 
         "
       >
-        FETCHING DATA FROM NASA...
+        Loading...
       </p>
     </div>
   );
