@@ -5,9 +5,15 @@ import { Send } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion, Variants } from "framer-motion";
-import { webThreeForm } from "@/api/env";
 
-const WEB3FORMS_ACCESS_KEY = webThreeForm;
+// 1. HARDCODE THE ACCESS KEY DIRECTLY
+// NOTE: I am using the key you provided in the example: ff7edf38-cb0c-4b2b-9f27-f9a0f51403c2
+const WEB3FORMS_ACCESS_KEY = "ff7edf38-cb0c-4b2b-9f27-f9a0f51403c2";
+
+// 2. REMOVE THE UNUSED IMPORTS (webThreeForm)
+// The import is no longer needed since the key is defined above.
+// import { webThreeForm } from "@/api/env";
+// const WEB3FORMS_ACCESS_KEY = webThreeForm; // This line is now replaced
 
 const useMagneticEffect = (ref: React.RefObject<HTMLButtonElement | null>) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -77,11 +83,12 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!WEB3FORMS_ACCESS_KEY) {
-      toast.error("Configuration error: Form access key is missing.");
-      setIsLoading(false);
-      return;
-    }
+    // 3. REMOVE THE CONFIGURATION ERROR CHECK
+    // if (!WEB3FORMS_ACCESS_KEY) {
+    //   toast.error("Configuration error: Form access key is missing.");
+    //   setIsLoading(false);
+    //   return;
+    // }
 
     const formDataWeb3 = new FormData();
     formDataWeb3.append("access_key", WEB3FORMS_ACCESS_KEY);
